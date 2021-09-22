@@ -1,7 +1,7 @@
 const createMongoClient = require('../shared/mongo');
 
 
-//http://localhost:7071/api/employee/:id
+//http://localhost:7071/api/delete/:id
 module.exports = async function (context, req) {
     const {id} = req.params;
     
@@ -17,13 +17,14 @@ module.exports = async function (context, req) {
     const Employees = await db.collection('employees');
 
     try{
-        const body = await Employees.findOne({empNumber:parseInt(id)})
+        const body = await Employees.deleteOne({empNumber:parseInt(id)});
         connection.close();
         if(body){
             context.res ={
                 status: 201,
-                body
+                body:"Successfully deleted Employee"
             }
+            return;
         }
         throw 404
     }catch(e){

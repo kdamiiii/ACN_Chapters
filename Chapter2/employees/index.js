@@ -1,5 +1,6 @@
 const createMongoClient = require('../shared/mongo');
 
+//http://localhost:7071/api/employees/
 module.exports = async function (context, req) {   
     const {db, connection} = await createMongoClient();
 
